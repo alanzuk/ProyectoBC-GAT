@@ -1,0 +1,13 @@
+
+public abstract class Tanque extends Destructible {
+	private int velocidadMov;
+	private int velocidadDisp;
+	private char direccion;
+	private Celda ubicacion;//  celda?????
+	
+	//metodos
+	public abstract Proyectil disparar(int nivel,int tipo);
+	public void moverse();
+	public Celda getUbicacion();
+
+}
