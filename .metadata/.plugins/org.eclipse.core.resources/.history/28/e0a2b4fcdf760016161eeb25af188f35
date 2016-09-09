@@ -1,0 +1,41 @@
+package Destructible;
+
+import Proyectil.Proyectil;
+
+public class Jugador extends Tanque {
+	private int nivel;
+	private int vidas;
+	
+	
+	public Jugador(){
+		nivel=1;
+		velocidadMov=1;
+		velocidadDisp=1;z
+	}
+	
+	//comandos
+	public void setNivel(int n){
+		nivel=n;
+	}
+		
+	//consultas
+	public int getVidas(){
+		return vidas;
+	}
+    public void setVidas(int e){
+    	vidas=e;
+    }
+	public int getNivel(){
+		return nivel;
+	}
+
+	
+	public void moverse(){
+		//implementar
+	}
+	@Override
+	public Proyectil disparar(int nivel, int tipo) {
+		//implementar
+		return null;
+	}
+}

@@ -1,0 +1,26 @@
+package Tanque;
+
+import Proyectil.Proyectil;
+
+public abstract class Enemigo extends Tanque{
+	private int recompensa;
+	
+	
+	
+	
+	public int getRecompensa(){
+		return recompensa;
+	}
+	@Override
+	public abstract disparar(int nivel, int tipo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void moverse() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

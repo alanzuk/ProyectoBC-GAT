@@ -1,0 +1,46 @@
+package Tanque;
+
+public class Jugador extends Tanque {
+	private int nivel;
+	private int puntos;
+	private int vidas;
+	
+	public Jugador(){
+		nivel=1;
+		puntos=0;
+		vidas=3;
+	}
+	
+	//comandos
+	public void setNivel(int n){
+		nivel=n;
+	}
+	public void setVidas(int v){
+		vidas=v;
+	}
+	
+	public void recibirPuntos(int p){
+		puntos+=p;
+	}
+	
+	//consultas
+	public int getVidas(){
+		return vidas;
+	}
+	public int getPuntos(){
+		return puntos;
+	}
+	public int getNivel(){
+		return nivel;
+	}
+
+	
+	public void moverse(){
+		//implementar
+	}
+	@Override
+	public Proyectil disparar(int nivel, int tipo) {
+		//implementar
+		return null;
+	}
+}

@@ -1,0 +1,48 @@
+package Destructible;
+import general.*;
+import Proyectil.Proyectil;
+
+public class Jugador extends Tanque {
+	private int nivel;
+	private int vidas;
+	
+	
+	public Jugador(){
+		nivel=1;
+		velocidadMov=1;
+		velocidadDisp=1;
+	}
+	
+	//comandos
+	public void setNivel(int n){
+		nivel=n;
+	}
+		
+	//consultas
+	public Celda getUbicacion()
+	{
+		super.getUbicacion();
+	}
+	public int getVidas(){
+		return vidas;
+	}
+
+    public void sacarVida(){
+    	
+    	vidas--;
+    }
+    public void sumarVida()
+    {
+    	vidas++;
+    }
+	public int getNivel(){
+		return nivel;
+	}
+
+	
+	public void moverse(){
+		//implementar
+	}
+	
+
+}
