@@ -1,0 +1,31 @@
+package Tanque;
+
+import Proyectil.Proyectil;
+
+public class Basico extends Enemigo {
+	
+
+	public Basico()
+	{
+		recompensa=100;
+		
+	}
+	
+	
+	
+	
+	
+	
+	@Override
+	public Proyectil disparar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void moverse() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

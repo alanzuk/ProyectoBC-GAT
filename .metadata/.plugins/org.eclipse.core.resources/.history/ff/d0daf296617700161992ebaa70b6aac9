@@ -1,0 +1,30 @@
+package Tanque;
+import general.*;
+import Proyectil.Proyectil;
+
+public class Blindado extends Enemigo{
+
+	
+	public Blindado(Celda u)
+	{
+		 recompensa=400;
+		 velocidadMov=1;
+		 velocidadDisp=2;
+		 ubicacion=u;
+		 aguante=4;
+	}
+	
+	
+	@Override
+	public Proyectil disparar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void moverse() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

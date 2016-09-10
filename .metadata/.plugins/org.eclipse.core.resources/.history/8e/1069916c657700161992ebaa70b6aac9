@@ -1,0 +1,22 @@
+package general;
+
+public  class Celda {
+	protected int x;
+	protected int y;
+	protected Coordenada ubicacion;
+	
+	
+	public Celda(int x,int y)
+	{
+		this.x=x;
+		this.y=y;
+		ubicacion.set(x,y);
+		
+	}
+	
+	public  Coordenada getUbicacion()
+	{
+		return ubicacion;
+		
+	}
+}

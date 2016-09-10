@@ -5,23 +5,54 @@ import Proyectil.Proyectil;
 public class Jugador extends Tanque {
 	private int nivel;
 	private int vidas;
+	private int simultaneo;
 	
-	
-	public Jugador(){
+	public Jugador(Celda u){
 		nivel=1;
-		velocidadMov=1;
+		velocidadMov=2;
 		velocidadDisp=1;
+		aguante=1;
+		ubicacion=u;
+		x=ubicacion.getUbicacion().getX();
+		y=ubicacion.getUbicacion().getY();
+		simultaneo=1;
 	}
 	
 	//comandos
-	public void setNivel(int n){
-		nivel=n;
+	public void subirNivel(){
+	
+		if(nivel<4){
+		switch (nivel){
+		case 1:
+			nivel=2;
+			velocidadMov=3;
+			velocidadDisp=2;
+			aguante=1;
+			simultaneo=1;
+			break;
+		case 2:
+			nivel=3;
+			velocidadMov=2;
+			velocidadDisp=2;
+			aguante=2;
+			simultaneo=2;
+			break;
+		case 3:
+			nivel=4;
+			velocidadMov=2;
+			velocidadDisp=3;
+			aguante=4;
+			simultaneo=3;
+			break;	
+		 }
+		} //fin del if y switch
+			
 	}
 		
 	//consultas
 	public Celda getUbicacion()
 	{
-		return super.getUbicacion();
+		return ubicacion;
 	}
 	public int getVidas(){
 		return vidas;
@@ -40,8 +71,30 @@ public class Jugador extends Tanque {
 	}
 
 	
-	public void moverse(){
-		//implementar
+	public void moverse(int d){
+		
+		switch(d){
+		
+		 case 1:
+			y+=5;
+		 	break;
+		 case 2:
+			 y-=5;
+			 break;
+		 case 3:
+			 x+=5;
+			 break;
+		 case 4:
+			 x-=5;
+			 break;
+		
+		}
+	}
+
+	@Override
+	public Proyectil disparar() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

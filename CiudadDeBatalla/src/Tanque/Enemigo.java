@@ -3,7 +3,7 @@ package Tanque;
 import Proyectil.Proyectil;
 
 public abstract class Enemigo extends Tanque{
-	private int recompensa;
+	protected int recompensa;
 	
 	
 	
@@ -15,6 +15,6 @@ public abstract class Enemigo extends Tanque{
 	public abstract Proyectil disparar();
 
 	@Override
-	public abstract  void moverse();
+	public abstract  void moverse(int n);
 
 }
