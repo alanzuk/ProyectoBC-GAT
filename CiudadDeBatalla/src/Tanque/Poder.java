@@ -11,8 +11,8 @@ public class Poder extends Enemigo
 		 velocidadMov=2;
 		 velocidadDisp=3;
 		 ubicacion=u;
-		 x=ubicacion.getUbicacion().getX();
-		 y=ubicacion.getUbicacion().getY();
+		 x=ubicacion.getX();
+		 y=ubicacion.getY();
 		 aguante=1;
 	}
 	

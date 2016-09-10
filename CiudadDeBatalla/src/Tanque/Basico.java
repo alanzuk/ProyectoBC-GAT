@@ -12,8 +12,8 @@ public class Basico extends Enemigo {
 		 velocidadMov=1;
 		 velocidadDisp=1;
 		 ubicacion=u;
-		 x=ubicacion.getUbicacion().getX();
-		 y=ubicacion.getUbicacion().getY();
+		 x=ubicacion.getX();
+		 y=ubicacion.getY();
 		 aguante=1;
 	}
 	

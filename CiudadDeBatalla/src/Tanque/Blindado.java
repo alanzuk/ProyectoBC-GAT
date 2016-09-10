@@ -3,7 +3,7 @@ import general.*;
 import Proyectil.Proyectil;
 
 public class Blindado extends Enemigo{
-
+	private int contador;
 	
 	public Blindado(Celda u)
 	{
@@ -11,9 +11,9 @@ public class Blindado extends Enemigo{
 		 velocidadMov=1;
 		 velocidadDisp=2;
 		 ubicacion=u;
-		 x=ubicacion.getUbicacion().getX();
-		 y=ubicacion.getUbicacion().getY();
 		 aguante=4;
+		 contador=0;
+		 direccion=2;
 	}
 	
 	
@@ -25,22 +25,17 @@ public class Blindado extends Enemigo{
 
 	@Override
 	public void moverse(int d) {
-		switch(d){
-		
-		 case 1:
-			y+=5;
-		 	break;
-		 case 2:
-			 y-=5;
-			 break;
-		 case 3:
-			 x+=5;
-			 break;
-		 case 4:
-			 x-=5;
-			 break;
-		
+		if(contador%10==0){
+			direccion=d;
 		}
+		contador++;
+		switch(direccion){
+		case 1:{ ubicacion.moverY(-(velocidadMov/10)); break;}
+		 case 2:{ ubicacion.moverY(velocidadMov/10); break; }
+		 case 3:{ ubicacion.moverX(velocidadMov/10); break; }
+		 case 4:{ ubicacion.moverX(-(velocidadMov/10)); break;}
+		}
+		
 		
 	}
 

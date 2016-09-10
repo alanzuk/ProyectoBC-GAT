@@ -12,8 +12,8 @@ public class Rapido extends Enemigo {
 		 velocidadMov=3;
 		 velocidadDisp=2;
 		 ubicacion=u;
-		 x=ubicacion.getUbicacion().getX();
-		 y=ubicacion.getUbicacion().getY();
+		 x=ubicacion.getX();
+		 y=ubicacion.getY();
 		 aguante=1;
 		
 	}

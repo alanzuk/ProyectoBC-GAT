@@ -3,12 +3,12 @@ import general.*;
 import Proyectil.Proyectil;
 
 public abstract class Tanque {
-	protected int velocidadMov;
-	protected int velocidadDisp;
+	protected double velocidadMov;
+	protected double velocidadDisp;
 	protected Celda ubicacion;
-	protected int x;
-	protected int y;
 	protected int aguante;
+	protected int direccion;
+	
 
 	//metodos
 	public abstract Proyectil disparar();

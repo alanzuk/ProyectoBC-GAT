@@ -1,0 +1,31 @@
+package Proyectil;
+import general.Celda;
+import general.Coordenada;
+
+public class Proyectil {
+	private int direccion;
+	
+	public Proyectil(Celda u, int dir) {
+		super(u);
+		direccion=dir;
+	}
+
+
+	public Celda afectar(){
+		return null;
+	}
+	
+	
+	public Coordenada ubicacion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Coordenada getUbicacion() {
+		
+		return null;
+	}
+	
+	
+}

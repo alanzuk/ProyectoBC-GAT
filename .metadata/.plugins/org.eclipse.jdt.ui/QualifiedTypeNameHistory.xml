@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="Aplicacion.GUI"/>
+<fullyQualifiedTypeName name="general.Partida"/>
+<fullyQualifiedTypeName name="Tanque.Tanque"/>
+<fullyQualifiedTypeName name="Tanque.Blindado"/>
+<fullyQualifiedTypeName name="java.awt.event.KeyListener"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+</qualifiedTypeNameHistroy>

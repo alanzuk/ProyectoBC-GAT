@@ -1,0 +1,9 @@
+package general;
+
+public class ObjGrafico {
+		private String path;
+		private int defaultX,defaultY;
+		
+		
+		
+}

@@ -2,21 +2,26 @@ package Proyectil;
 import general.Celda;
 import general.Coordenada;
 
-public class Proyectil extends Celda {
+public class Proyectil {
+	private int direccion;
+	private Celda ubicacion;
 	
+	public Proyectil(Celda u, int dir) {
+		direccion=dir;
+		ubicacion=u;
+	}
+
+
 	public Celda afectar(){
-		
-		
+		return null;
 	}
 	
 	
-	@Override
 	public Coordenada ubicacion() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public Coordenada getUbicacion() {
 		
 		return null;

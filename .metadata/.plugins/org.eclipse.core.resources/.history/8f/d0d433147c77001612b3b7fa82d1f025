@@ -1,0 +1,67 @@
+package Aplicacion;
+
+import java.awt.EventQueue;
+import java.awt.Image;
+
+import javax.swing.JFrame;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import general.Partida;
+
+public class GUI {
+	private Partida partida;
+	private JFrame frame;
+	private static int tamanio_celda=40;
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUI window = new GUI();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public GUI() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		
+		//Creacion de Partida
+		
+		partida=new Partida();
+		
+
+		
+	
+		
+		frame = new JFrame();
+		frame.setBounds(100, 100, 17*tamanio_celda, 17*tamanio_celda);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);		
+	    JLabel lblPlayer = new JLabel(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("Jugador.png")).getImage().getScaledInstance(tamanio_celda, tamanio_celda, Image.SCALE_SMOOTH)));
+
+		lblPlayer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPlayer.setBounds(16,7,tamanio_celda, tamanio_celda);
+		frame.getContentPane().add(lblPlayer);
+	}
+}

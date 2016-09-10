@@ -13,8 +13,6 @@ public class Jugador extends Tanque {
 		velocidadDisp=1;
 		aguante=1;
 		ubicacion=u;
-		x=ubicacion.getUbicacion().getX();
-		y=ubicacion.getUbicacion().getY();
 		simultaneo=1;
 	}
 	
@@ -74,19 +72,10 @@ public class Jugador extends Tanque {
 	public void moverse(int d){
 		
 		switch(d){
-		
-		 case 1:
-			y+=5;
-		 	break;
-		 case 2:
-			 y-=5;
-			 break;
-		 case 3:
-			 x+=5;
-			 break;
-		 case 4:
-			 x-=5;
-			 break;
+		 case 1:{ ubicacion.moverY(-(velocidadMov/10)); break;}
+		 case 2:{ ubicacion.moverY(velocidadMov/10); break; }
+		 case 3:{ ubicacion.moverX(velocidadMov/10); break; }
+		 case 4:{ ubicacion.moverX(-(velocidadMov/10)); break;}
 		
 		}
 	}

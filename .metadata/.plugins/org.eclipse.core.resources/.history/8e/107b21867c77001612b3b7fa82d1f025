@@ -1,0 +1,29 @@
+package general;
+import Aplicacion.GUI;
+import Poderes.Powerup;
+import Tanque.Enemigo;
+import Tanque.Jugador;
+
+public class Partida {
+	protected Jugador miJugador;
+	protected Enemigo[] misEnemigos;
+	protected Celda[][] mapa;
+	protected Powerup[] miPowerup;
+	protected int puntos;
+	
+
+	public Partida(){
+		misEnemigos= new Enemigo[16];
+		mapa= new Celda[17][17];
+		miPowerup= new Powerup[6];
+		miJugador=new Jugador(new Celda(7,16));
+	}
+
+	public void gameOver(){
+		
+	}
+
+	public Celda getJugador() {
+		return miJugador.getUbicacion();
+	}
+}

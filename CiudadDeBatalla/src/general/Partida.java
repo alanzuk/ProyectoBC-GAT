@@ -1,11 +1,17 @@
 package general;
+import java.awt.Component;
+import java.util.Random;
+
+import Aplicacion.GUI;
 import Poderes.Powerup;
+import Tanque.Blindado;
 import Tanque.Enemigo;
 import Tanque.Jugador;
+import Tanque.Tanque;
 
 public class Partida {
 	protected Jugador miJugador;
-	protected Enemigo[] misEnemigos;
+	protected Tanque[] misEnemigos;
 	protected Celda[][] mapa;
 	protected Powerup[] miPowerup;
 	protected int puntos;
@@ -13,10 +19,41 @@ public class Partida {
 
 	public Partida(){
 		misEnemigos= new Enemigo[16];
-		mapa= new Celda[16][16];
+		int x_enemigo=0;
+		for(int i=0;i<16;i++){
+			misEnemigos[i]=new Blindado(new Celda(x_enemigo,5));
+			x_enemigo+=4;
+		}
+		
+		mapa= new Celda[17][17];
 		miPowerup= new Powerup[6];
-		miJugador=new Jugador();
+		miJugador=new Jugador(new Celda(5,15));
+		
 	}
 
-	public void gameOver();
+	public void gameOver(){
+		
+	}
+
+	public Celda getJugador() {
+		return miJugador.getUbicacion();
+	}
+
+	
+	public void mover()
+	{
+		Random rnd=new Random();
+		int d;
+		for(int i=0;i<misEnemigos.length;i++){
+			d=rnd.nextInt(4);
+			misEnemigos[i].moverse(d);
+		}
+	}
+	public void mover(int i) {
+		miJugador.moverse(i);
+	}
+
+	public Celda getEnemigo(int i) {
+		return misEnemigos[i].getUbicacion();
+	}
 }
