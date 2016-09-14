@@ -1,5 +1,14 @@
 package Obstaculo;
 
-public class Cemento {
+import general.Celda;
 
+public class Cemento extends Celda {
+	private static final String ruta="Cemento";
+	
+	public Cemento(int x,int y){
+		super(x,y,ruta);
+		atravezable=false;
+		destructible=false;
+	}
+	
 }

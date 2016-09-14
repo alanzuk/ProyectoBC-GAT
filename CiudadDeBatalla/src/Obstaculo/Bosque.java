@@ -1,5 +1,14 @@
 package Obstaculo;
 
-public class Bosque {
+import general.Celda;
 
+public class Bosque extends Celda {
+	private static final String ruta="Bosque";
+	
+	public Bosque(int x,int y){
+		super(x,y,ruta);
+		atravezable=true;
+		destructible=false;
+	}
+	
 }

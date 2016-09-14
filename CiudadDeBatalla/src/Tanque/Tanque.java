@@ -2,23 +2,26 @@ package Tanque;
 import general.*;
 import Proyectil.Proyectil;
 
-public abstract class Tanque {
+public abstract class Tanque extends Celda {
+	protected String rutaGrafica;
 	protected double velocidadMov;
 	protected double velocidadDisp;
-	protected Celda ubicacion;
 	protected int aguante;
 	protected int direccion;
 	
+	
+	public Tanque(int x, int y,String ruta,int dir) {
+		super(x, y,ruta,dir);
+		direccion=dir;
+		rutaGrafica=ruta;
+	}
 
-	//metodos
 	public abstract Proyectil disparar();
-	
-	public abstract Celda getUbicacion();
-	
-	
+			
 	public int getDireccion(){
 		return direccion;
 	}
+	
 	public void setDireccion(int d){
 		direccion=d;
 	}
@@ -26,15 +29,29 @@ public abstract class Tanque {
 	public void mover(int i){
 		
 		switch(i){
-			case 1:{ ubicacion.moverY(-(velocidadMov/10)); break;}
-			case 2:{ ubicacion.moverY(velocidadMov/10); break; }
-			case 3:{ ubicacion.moverX(velocidadMov/10); break; }
-			case 4:{ ubicacion.moverX(-(velocidadMov/10)); break;}
-		
-		
+			case 1:{
+					moverY(-(velocidadMov/10));
+					path_dinamico=""+i;
+					break;
+			}
+			case 2:{
+				moverY(velocidadMov/10);
+				path_dinamico=""+i;
+				break;
+			}
+			case 3:{
+				moverX(velocidadMov/10);
+				path_dinamico=""+i;
+				break; 
+			}
+			case 4:{
+				moverX(-(velocidadMov/10));
+				path_dinamico=""+i;
+				break;
+			}
 		}
 	}
-	
+
 	
 	
 }

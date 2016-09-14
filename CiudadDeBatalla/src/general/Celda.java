@@ -1,17 +1,44 @@
 package general;
 
-public  class Celda {
+public class Celda {
 
 	protected double x;
 	protected double y;
+	protected boolean atravezable;
+	protected boolean destructible;
+	//Atributos GRAFICOS
 	protected String path;
+	protected String path_dinamico;
+	protected String extension=".png";
+	
+	
+	//Constructor por defecto.
 	
 	public Celda(int x,int y){
 		this.x=x;
 		this.y=y;
-		path="";
+		path="Vacio";
+		path_dinamico="";
 	}
 	
+	//Constructor para Obstaculos
+	
+	public Celda(int x2, int y2, String ruta) {
+		x=x2;
+		y=y2;
+		path=ruta;
+		path_dinamico="";
+	}
+	
+	//Contructor para Tanques 
+	
+	public Celda(int x2, int y2, String ruta,int direccion) {
+		x=x2;
+		y=y2;
+		path=ruta;
+		path_dinamico=""+direccion;
+	}
+
 	public double getX(){
 		return x;
 	}
@@ -28,19 +55,22 @@ public  class Celda {
 		this.y+=d;
 	}
 	
-	public void setPath(char c){
-		switch(c){
+	public void impactar(){
 		
-		case'e': {	path= "C:/Users/tomas/Documents/GitHub/ProyectoTDP2016ATG/CiudadDeBatalla/src/Aplicacion/Jugador1.png";
-					break;}
-		case'l': {break;}
-		case' ': {break;}
-		case'a': {break;}
-		case'w': {break;}
-		case'b': {break;}
-		case'x': {break;}
-		case'j': {break;}
-		}
 	}
+	
+	public void afectar(){}
+	
+	
+	//Metodos Graficos
+	
+	public String getPath(){
+		return path+path_dinamico+extension;
+	}
+	
+	public void setPath(String ruta){
+		path=ruta;
+	}
+
 	
 }

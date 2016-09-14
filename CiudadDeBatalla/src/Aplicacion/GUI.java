@@ -5,19 +5,10 @@ import java.awt.EventQueue;
 import java.awt.Image;
 
 import javax.swing.JFrame;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Random;
-import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -25,8 +16,11 @@ import general.Celda;
 import general.Partida;
 
 public class GUI implements KeyListener  {
+	
+	private final String rutaSprites="src/Aplicacion/resources/";
 	private static Partida partida;
 	private JFrame frame;
+	private static JLabel[][] MapaVirtual;
 	private static JLabel lblPlayer;
 	private static JLabel lblEnemigo[];
 	private static int tamanio_celda=40;
@@ -37,6 +31,7 @@ public class GUI implements KeyListener  {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					GUI window = new GUI();
@@ -57,7 +52,8 @@ public class GUI implements KeyListener  {
 	public GUI() {
 		
 		initialize();
-		
+		MapaVirtual=new JLabel[partida.getMapa().length][partida.getMapa().length];
+		crearMapa();
 	}
 
 	/**
@@ -70,46 +66,23 @@ public class GUI implements KeyListener  {
 		
 		partida=new Partida();
 		
-		//creacion del mapa
-	
-		//File a= new File("aplicacion/mapa1.txt");
-		try{
-			
-			FileReader fr= new FileReader("C:/Users/tomas/Documents/GitHub/ProyectoTDP2016ATG/CiudadDeBatalla/src/Aplicacion/mapa1.txt");
-			BufferedReader br= new BufferedReader(fr);
-			String s;
-					
-			for(int f=0;f<17;f++){
-				s=br.readLine();
-				for(int c=0; c<17;c++){
-					Celda cel=new Celda(f,c);
-					cel.setPath(s.charAt(c));	
-					partida.setMapa(f, c,cel ); 
-				}
-				
-			}
-			
-			br.close();
-		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
-
-
 		//Creacion del Frame
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 17*tamanio_celda, 17*tamanio_celda);
+		frame.setBounds(100, 100, 18*tamanio_celda-23, 18*tamanio_celda); // Nose porque tengo que redimensionar asi 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);	
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.addKeyListener(this);
 	    
-	    //Creacion Jugador 
-	    System.out.println(getClass());
-	    lblPlayer = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("Jugador1.png")).getImage().getScaledInstance(tamanio_celda, tamanio_celda, Image.SCALE_SMOOTH)));
+	    //Creacion Jugador
+		System.out.println(rutaSprites+partida.getJugador().getPath());
+		System.out.println(partida.getJugador().getPath());
+
+	    lblPlayer = new JLabel();
+		lblPlayer.setIcon(new ImageIcon(new ImageIcon("src/Aplicacion/resources/"+partida.getJugador().getPath()).getImage().getScaledInstance(tamanio_celda, tamanio_celda, Image.SCALE_SMOOTH)));
 		lblPlayer.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPlayer.setBounds(200,601,tamanio_celda, tamanio_celda);
+		lblPlayer.setBounds((int) (tamanio_celda*(partida.getJugador().getX())),(int) (tamanio_celda*(partida.getJugador().getY())),tamanio_celda, tamanio_celda);
 		frame.getContentPane().add(lblPlayer);
 
 		//Creo los Enemigos a partir del arreglo
@@ -117,26 +90,43 @@ public class GUI implements KeyListener  {
 		lblEnemigo = new JLabel[16];
 		
 		for(int i=0;i<4;i++){
-			lblEnemigo[i] = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("Jugador1.png")).getImage().getScaledInstance(tamanio_celda, tamanio_celda, Image.SCALE_SMOOTH)));
+			lblEnemigo[i] = new JLabel();
+			lblEnemigo[i].setIcon(new ImageIcon(new ImageIcon("src/Aplicacion/resources/"+partida.getEnemigo(i).getPath()).getImage().getScaledInstance(tamanio_celda, tamanio_celda, Image.SCALE_SMOOTH)));
 			lblEnemigo[i].setHorizontalAlignment(SwingConstants.CENTER);
-			lblEnemigo[i].setBounds((int)(tamanio_celda*(partida.getEnemigo(i).getUbicacion().getX())),(int) (tamanio_celda*(partida.getEnemigo(i).getUbicacion().getY())),tamanio_celda, tamanio_celda);
+			lblEnemigo[i].setBounds((int)(tamanio_celda*(partida.getEnemigo(i).getX())),(int) (tamanio_celda*(partida.getEnemigo(i).getY())),tamanio_celda, tamanio_celda);
 			frame.getContentPane().add(lblEnemigo[i]);
 		}
-		
-		
-		
+
 	}
 
 	//Oyente Teclado
 	
-	public static void refreshGUI(){
-		for(int i=0;i<4;i++)
-			lblEnemigo[i].setBounds((int)(tamanio_celda*(partida.getEnemigo(i).getUbicacion().getX())),(int) (tamanio_celda*(partida.getEnemigo(i).getUbicacion().getY())),tamanio_celda, tamanio_celda);
+	public void refreshGUI(){
+				
+		for(int i=0;i<4;i++){
+			lblEnemigo[i].setIcon(new ImageIcon(new ImageIcon("src/Aplicacion/resources/"+partida.getEnemigo(i).getPath()).getImage().getScaledInstance(tamanio_celda, tamanio_celda, Image.SCALE_SMOOTH)));
+			lblEnemigo[i].setBounds((int)(tamanio_celda*(partida.getEnemigo(i).getX())),(int) (tamanio_celda*(partida.getEnemigo(i).getY())),tamanio_celda, tamanio_celda);
+		}
 		
-		lblPlayer.setBounds((int) (tamanio_celda*(partida.getJugador().getUbicacion().getX())),(int) (tamanio_celda*(partida.getJugador().getUbicacion().getY())),tamanio_celda, tamanio_celda);
+		System.out.println(partida.getJugador().getPath());
+		lblPlayer.setIcon(new ImageIcon(new ImageIcon("src/Aplicacion/resources/"+partida.getJugador().getPath()).getImage().getScaledInstance(tamanio_celda, tamanio_celda, Image.SCALE_SMOOTH)));
+		lblPlayer.setBounds((int) (tamanio_celda*(partida.getJugador().getX())),(int) (tamanio_celda*(partida.getJugador().getY())),tamanio_celda, tamanio_celda);
 	}
 	
-	@Override
+	public void crearMapa(){
+		Celda[][] mapa=partida.getMapa();
+		for(int f=0;f<mapa.length;f++){
+			for(int c=0;c<mapa.length;c++){													// mapa[f][c].getPath()
+				MapaVirtual[f][c] = new JLabel(new ImageIcon(new ImageIcon("src/Aplicacion/resources/"+mapa[f][c].getPath()).getImage().getScaledInstance(tamanio_celda, tamanio_celda, Image.SCALE_SMOOTH)));
+				MapaVirtual[f][c].setHorizontalAlignment(SwingConstants.CENTER);
+				MapaVirtual[f][c].setBounds((int)(tamanio_celda*(mapa[f][c].getX())),(int)(tamanio_celda*(mapa[f][c].getY())),tamanio_celda, tamanio_celda);
+				frame.getContentPane().add(MapaVirtual[f][c]);	
+			}
+		}
+		
+	}
+	
+
 	public void keyPressed(KeyEvent e) {
 		
 		switch(e.getKeyCode()){
@@ -161,7 +151,7 @@ public class GUI implements KeyListener  {
 		refreshGUI();
 	}
 
-	@Override
+	
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		

@@ -4,30 +4,18 @@ import Proyectil.Proyectil;
 import general.Celda;
 
 public class Basico extends Enemigo {
-	
+	protected final static String ruta="Enemigo";
 
-	public Basico(Celda u)
-	{
+	public Basico(int x,int y){
+		 super(x,y,ruta);
 		 recompensa=100;
 		 velocidadMov=1;
 		 velocidadDisp=1;
-		 ubicacion=u;
 		 aguante=1;
 	}
 	
-	
-	@Override
 	public Proyectil disparar() {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
 	
-	
-
-	public Celda getUbicacion() {
-		return ubicacion;
-	}
-
 }

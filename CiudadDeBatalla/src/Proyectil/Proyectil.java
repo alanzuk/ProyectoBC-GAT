@@ -10,15 +10,16 @@ public class Proyectil {
 		direccion=dir;
 		ubicacion=u;
 	}
-
+	
+	public void setGrafico(){
+		
+	}
 
 	public Celda afectar(){
 		return null;
 	}
 	
-	
 	public Coordenada ubicacion() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

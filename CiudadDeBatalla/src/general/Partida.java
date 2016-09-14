@@ -1,12 +1,24 @@
 package general;
 import java.awt.Component;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import Aplicacion.GUI;
+import Obstaculo.Agua;
+import Obstaculo.Aguila;
+import Obstaculo.Cemento;
+import Obstaculo.Ladrillo;
 import Poderes.Powerup;
+import Tanque.Basico;
 import Tanque.Blindado;
 import Tanque.Enemigo;
 import Tanque.Jugador;
+import Tanque.Rapido;
 import Tanque.Tanque;
 
 public class Partida {
@@ -16,38 +28,107 @@ public class Partida {
 	protected Powerup[] miPowerup;
 	protected int puntos;
 	private int contador;
+	Map<Character,String> MapeoGraficos=new HashMap<Character,String>();
+
 
 	public Partida(){
 		misEnemigos= new Enemigo[16];
+		
 		int x_enemigo=0;
 		for(int i=0;i<16;i++){
-			misEnemigos[i]=new Blindado(new Celda(x_enemigo,5));
+			misEnemigos[i]=new Blindado(x_enemigo,5);
 			x_enemigo+=4;
 			
 		}
 		contador=0;	
 		
 		miPowerup= new Powerup[6];
-		miJugador=new Jugador(new Celda(5,15));
+		miJugador=new Jugador(5,15);
+		
+		//Creacion del mapa
+		
+		mapa=new Celda[17][17];
+		
+		//Para Guardar las rutas de las imagenes 
+		
+	
+			File a= new File("src/Aplicacion/MapaBeta.txt");
+		try{
+			FileReader fr= new FileReader(a);
+			BufferedReader br= new BufferedReader(fr);
+			String s;
+						
+			for(int f=0;f<17;f++){
+				s=br.readLine();
+				System.out.println(s);
+				for(int c=0; c<17;c++){
+					char tipo=s.charAt(c);
+					crearCelda(c,f,tipo);
+					System.out.println(mapa[c][f].getX()+" - "+mapa[c][f].getY()+" - "+mapa[c][f].getPath());
+				}	
+			}
+			br.close();
+		}
+		catch(IOException e){e.printStackTrace();}
 		
 	}
 	
 	
-	public void setMapa(int f, int c,Celda cel){
-		//mapa[f][c]= cel;
+	private void crearCelda(int f, int c, char tipo) {
+		
+		switch(tipo){
+		case 'a' :{ mapa[f][c]=new Agua(f,c); 
+			break;
+		}
+		case 'l' :{ mapa[f][c]=new Ladrillo(f,c); 
+		break;
+		}
+		case 'c' :{ mapa[f][c]=new Cemento(f,c); 
+		break;
+		}
+		case ' ' :{ mapa[f][c]=new Celda(f,c); 
+		break;
+		}
+		case 'e' :{ mapa[f][c]=new Basico(f,c); 
+		break;
+		}
+		case 'x' :{ mapa[f][c]=new Aguila(f,c); 
+		break;
+		}
+		case 'r' :{ mapa[f][c]=new Rapido(f,c); 
+		break;
+		}
+		case 'j' :{ mapa[f][c]=new Jugador(f,c); 
+					miJugador=(Jugador) mapa[f][c];
+		break;
+		}
+		}
 	}
+
+
+	//Consultas 
+	
+	public Tanque getJugador(){
+		return miJugador;
+	}
+	
+	public Map<Character,String> getGraficos(){
+		return MapeoGraficos;
+	}
+	
+	public Celda[][] getMapa(){
+		return mapa;
+	}
+	
+	public Celda getUbicacion() {
+		return this.getUbicacion();
+	}
+	
+	//Comandos
 	
 	public void gameOver(){
 		
 	}
-	public Tanque getJugador(){
-		return miJugador;
-	}
-
-	public Celda getUbicacion() {
-		return this.getUbicacion();
-	}
-
 	
 	public void mover(int i) {
 		

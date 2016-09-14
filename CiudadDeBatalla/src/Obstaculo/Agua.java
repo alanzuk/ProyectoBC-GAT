@@ -1,5 +1,14 @@
 package Obstaculo;
 
-public class Agua {
+import general.Celda;
 
+public class Agua extends Celda {
+	private static final String ruta="Agua";
+	
+	public Agua(int x,int y){
+		super(x,y,ruta);
+		atravezable=false;
+		destructible=false;
+	}
+	
 }

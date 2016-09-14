@@ -1,5 +1,14 @@
 package Obstaculo;
 
-public class Aguila {
+import general.Celda;
 
+public class Aguila extends Celda{
+	private static final String ruta="Aguila";
+	
+	public Aguila(int x,int y){
+		super(x,y,ruta);
+		atravezable=false;
+		destructible=true;
+	}
+	
 }

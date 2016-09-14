@@ -3,16 +3,17 @@ import general.*;
 import Proyectil.Proyectil;
 
 public class Jugador extends Tanque {
+	private final static String ruta_Jugador="Jugador";
 	private int nivel;
 	private int vidas;
 	private int simultaneo;
 	
-	public Jugador(Celda u){
+	public Jugador(int x, int y){
+		super(x,y,ruta_Jugador,1);
 		nivel=1;
 		velocidadMov=2;
 		velocidadDisp=1;
 		aguante=1;
-		ubicacion=u;
 		simultaneo=1;
 	}
 	
@@ -47,34 +48,23 @@ public class Jugador extends Tanque {
 			
 	}
 		
-	//consultas
-	public Celda getUbicacion()
-	{
-		return ubicacion;
-	}
+	
 	public int getVidas(){
 		return vidas;
 	}
 
     public void sacarVida(){
-    	
     	vidas--;
     }
-    public void sumarVida()
-    {
+    public void sumarVida(){
     	vidas++;
     }
 	public int getNivel(){
 		return nivel;
 	}
 
-	
-
-	@Override
 	public Proyectil disparar() {
-		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 }
