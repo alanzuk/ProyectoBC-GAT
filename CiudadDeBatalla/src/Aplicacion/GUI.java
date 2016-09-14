@@ -1,27 +1,36 @@
 package Aplicacion;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
 import java.awt.event.ActionEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import general.Celda;
 import general.Partida;
 
 public class GUI implements KeyListener  {
-	private Partida partida;
+	private static Partida partida;
 	private JFrame frame;
-	private JLabel lblPlayer;
-	private JLabel lblEnemigo[];
+	private static JLabel lblPlayer;
+	private static JLabel lblEnemigo[];
 	private static int tamanio_celda=40;
+	private static int contador=0;
 	
 	/**
 	 * Launch the application.
@@ -32,13 +41,16 @@ public class GUI implements KeyListener  {
 				try {
 					GUI window = new GUI();
 					window.frame.setVisible(true);
-				} catch (Exception e) {
+					//falta fijar direccion
+				}
+				 catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		});
+		
+	});
+		
 	}
-
 	/**
 	 * Create the application.
 	 */
@@ -51,20 +63,46 @@ public class GUI implements KeyListener  {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	
 	private void initialize() {
 		
 		//Creacion de Partida
 		
 		partida=new Partida();
 		
+		//creacion del mapa
+	
+		//File a= new File("aplicacion/mapa1.txt");
+		try{
+			
+			FileReader fr= new FileReader("C:/Users/tomas/Documents/GitHub/ProyectoTDP2016ATG/CiudadDeBatalla/src/Aplicacion/mapa1.txt");
+			BufferedReader br= new BufferedReader(fr);
+			String s;
+					
+			for(int f=0;f<17;f++){
+				s=br.readLine();
+				for(int c=0; c<17;c++){
+					Celda cel=new Celda(f,c);
+					cel.setPath(s.charAt(c));	
+					partida.setMapa(f, c,cel ); 
+				}
+				
+			}
+			
+			br.close();
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
 
-		
+
 		//Creacion del Frame
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 17*tamanio_celda, 17*tamanio_celda);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);		
+		frame.getContentPane().setLayout(null);	
+		frame.getContentPane().setBackground(Color.BLACK);
 		frame.addKeyListener(this);
 	    
 	    //Creacion Jugador 
@@ -78,17 +116,12 @@ public class GUI implements KeyListener  {
 		
 		lblEnemigo = new JLabel[16];
 		
-		for(int i=0;i<lblEnemigo.length;i++){
+		for(int i=0;i<4;i++){
 			lblEnemigo[i] = new JLabel(new ImageIcon(new ImageIcon(getClass().getResource("Jugador1.png")).getImage().getScaledInstance(tamanio_celda, tamanio_celda, Image.SCALE_SMOOTH)));
 			lblEnemigo[i].setHorizontalAlignment(SwingConstants.CENTER);
-			lblEnemigo[i].setBounds((int)(tamanio_celda*(partida.getEnemigo(i).getX())),(int) (tamanio_celda*(partida.getEnemigo(i).getY())),tamanio_celda, tamanio_celda);
+			lblEnemigo[i].setBounds((int)(tamanio_celda*(partida.getEnemigo(i).getUbicacion().getX())),(int) (tamanio_celda*(partida.getEnemigo(i).getUbicacion().getY())),tamanio_celda, tamanio_celda);
 			frame.getContentPane().add(lblEnemigo[i]);
 		}
-		
-		
-
-		
-		
 		
 		
 		
@@ -96,41 +129,36 @@ public class GUI implements KeyListener  {
 
 	//Oyente Teclado
 	
-	public void refreshGUI(){
-		for(int i=0;i<lblEnemigo.length;i++)
-			lblEnemigo[i].setBounds((int)(tamanio_celda*(partida.getEnemigo(i).getX())),(int) (tamanio_celda*(partida.getEnemigo(i).getY())),tamanio_celda, tamanio_celda);
+	public static void refreshGUI(){
+		for(int i=0;i<4;i++)
+			lblEnemigo[i].setBounds((int)(tamanio_celda*(partida.getEnemigo(i).getUbicacion().getX())),(int) (tamanio_celda*(partida.getEnemigo(i).getUbicacion().getY())),tamanio_celda, tamanio_celda);
 		
-		lblPlayer.setBounds((int) (tamanio_celda*(partida.getJugador().getX())),(int) (tamanio_celda*(partida.getJugador().getY())),tamanio_celda, tamanio_celda);
+		lblPlayer.setBounds((int) (tamanio_celda*(partida.getJugador().getUbicacion().getX())),(int) (tamanio_celda*(partida.getJugador().getUbicacion().getY())),tamanio_celda, tamanio_celda);
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
-		partida.mover();
-		
 		switch(e.getKeyCode()){
 		case (KeyEvent.VK_UP):{ 
 			partida.mover(1); 
-			refreshGUI();
 			break;
 			}
 		case (KeyEvent.VK_DOWN):{
 			partida.mover(2);
-			refreshGUI();
 			break;
 			}
 		case (KeyEvent.VK_RIGHT):{
 			partida.mover(3);
-			refreshGUI();
 			break;
 			}
 		case (KeyEvent.VK_LEFT):{
 			partida.mover(4);
-			refreshGUI(); 
 			break;
 			}
 		 
 		}
+		refreshGUI();
 	}
 
 	@Override

@@ -1,5 +1,0 @@
-
-public class Celda {
-	public Coordenada ubicacion();
-	public Coordenada getUbicacion();
-}

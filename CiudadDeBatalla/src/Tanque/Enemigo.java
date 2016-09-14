@@ -14,7 +14,7 @@ public abstract class Enemigo extends Tanque{
 	@Override
 	public abstract Proyectil disparar();
 
-	@Override
-	public abstract  void moverse(int n);
+	
+	//public abstract  void moverse(int n);
 
 }

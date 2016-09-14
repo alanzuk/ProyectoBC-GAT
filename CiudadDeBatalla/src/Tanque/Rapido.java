@@ -12,8 +12,6 @@ public class Rapido extends Enemigo {
 		 velocidadMov=3;
 		 velocidadDisp=2;
 		 ubicacion=u;
-		 x=ubicacion.getX();
-		 y=ubicacion.getY();
 		 aguante=1;
 		
 	}
@@ -24,25 +22,7 @@ public class Rapido extends Enemigo {
 	}
 
 	@Override
-	public void moverse(int d) {
-		switch(d){
-		
-		 case 1:
-			y+=5;
-		 	break;
-		 case 2:
-			 y-=5;
-			 break;
-		 case 3:
-			 x+=5;
-			 break;
-		 case 4:
-			 x-=5;
-			 break;
-		
-		}
-		
-	}
+	
 	public Celda getUbicacion() {
 		return ubicacion;
 	}

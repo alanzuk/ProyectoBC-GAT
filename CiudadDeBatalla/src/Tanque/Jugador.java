@@ -69,16 +69,6 @@ public class Jugador extends Tanque {
 	}
 
 	
-	public void moverse(int d){
-		
-		switch(d){
-		 case 1:{ ubicacion.moverY(-(velocidadMov/10)); break;}
-		 case 2:{ ubicacion.moverY(velocidadMov/10); break; }
-		 case 3:{ ubicacion.moverX(velocidadMov/10); break; }
-		 case 4:{ ubicacion.moverX(-(velocidadMov/10)); break;}
-		
-		}
-	}
 
 	@Override
 	public Proyectil disparar() {
